@@ -58,9 +58,9 @@ function englishStemmer(word: string): string {
  */
 export function createSearchIndex(): FlexSearchDocument {
   return new FlexSearch.Document<IndexableDocument, string[]>({
-    // Use 'full' tokenization for substring matching
-    // This allows "auth" to match "authentication"
-    tokenize: 'full',
+    // Use 'forward' tokenization to avoid OOM with large doc sets
+    // See: https://github.com/scalvert/docusaurus-plugin-mcp-server/issues/11
+    tokenize: "forward"
 
     // Enable caching for faster repeated queries
     cache: 100,
